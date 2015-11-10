@@ -1,0 +1,18 @@
+<section data-ng-controller="HomeController">
+	<div class="container">
+      <form class="form-signin login">
+      	<div class="logo"><img src="modules/core/img/brand/eon.png" alt=""></div>
+        <h2 class="form-signin-heading">Eoncore Login</h2>
+        <label for="inputEmail" class="sr-only">Correo Electronico</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Correo Electronico" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+      </form>
+    <div ng-repeat="contact in contactlist">
+    	<p>{{contact.nombre}}</p>
+    	<p>{{contact.edad}}</p>
+    </div>
+    </div>
+
+</section>
