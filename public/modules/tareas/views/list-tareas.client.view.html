@@ -1,0 +1,47 @@
+<section data-ng-controller="TareasController">
+    <div class="page-header">
+        <h1>Tareas</h1>
+    </div>
+    <div>
+        <table ng-table="tableParams" ng-table-counts="hidde">
+            <tr ng-repeat="tarea in $data">
+                <!-- <td title="'Nombre'" filter="{ name: 'text'}" sortable="'name'">
+                    {{tarea.name}}</td>
+                <td title="'Prioridad'" filter="{ prioridad: 'text'}" sortable="'prioridad'">
+                    {{tarea.age}}</td> -->
+                <td data-title="'Nombre'">{{tarea.name}}</td>
+                <td data-title="'Prioridad'">{{tarea.prioridad}}</td>
+                <td>
+                    <div class="table-actions">
+                        <a class="btn btn-default" title="view" href="/#!/tareas/{{tarea._id}}">
+                            <span class="glyphicon glyphicon-eye-open"></span> 
+                        </a>
+                        <a class="btn btn-default" title="view" href="/#!/tareas/{{tarea._id}}/edit">
+                            <span class="glyphicon glyphicon-edit"></span> 
+                        </a>
+                        <button tpe="button" class="btn btn-danger" title="remove" data-ng-click="remove(tarea)">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- <div class="list-group">
+        <a data-ng-repeat="tarea in tareas" data-ng-href="#!/tareas/{{tarea._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="tarea.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="tarea.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="tarea.name"></h4>
+            <article>
+                <span class="prioridad">Prioridad: </span> {{tarea.prioridad}} | <span class="tarea">Tarea: </span>{{tarea.name}}
+            </article>
+        </a>
+    </div> -->
+    <div class="alert alert-warning text-center" data-ng-hide="!tareas.$resolved || tareas.length">
+    	No hay tareas registradas <a href="/#!/tareas/create">Registrar una Tarea</a>?
+    </div>
+</section>

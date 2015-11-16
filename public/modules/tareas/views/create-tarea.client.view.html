@@ -1,0 +1,28 @@
+<section data-ng-controller="TareasController">
+    <div class="page-header">
+        <h1>Nueva Tarea</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Nombre</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Nombre de la Tarea" required>
+                        <li class="glyphicon glyphicon-time"></li> Elige la prioridad
+                        <input type="radio" data-ng-model="prioridad" id="planificada" value="PLANIFICADA"/> Planificada
+                        <input type="radio" data-ng-model="prioridad" id="mejora" value="MEJORA"/> Mejora
+                        <input type="radio" data-ng-model="prioridad" id="correccion" value="CORRECCION"/> Correccion<br/><br/>
+                        <!-- <tt>prioridad = {{prioridad | json}}</tt><br/> -->
+
+                        <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
+                    </div>
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>
+

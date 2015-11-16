@@ -1,5 +1,8 @@
+body{
+	background-color: #f5f5f5;
+}
 .content {
-	margin-top: 50px;
+	margin-top: 100px;
 }
 .undecorated-link:hover {
 	text-decoration: none;
@@ -13,14 +16,42 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
-.login{
-	width: 40%;
-	margin:0 auto;
-	margin-top: 150px;
+.navbar-header img{
+	width:100px;
+	position:relative;
+	bottom:12px;
 }
-.login h2{
-	text-align: center;
+.ng-table{
+	width: 100%;
 }
-.login .logo{
-	text-align: center;
+
+.ng-table>thead>tr>th{
+	text-align:left;
+	border:0;
+}
+
+.ng-table>tbody>tr>th, .ng-table>tfoot>tr>th, .ng-table>thead>tr>td, .ng-table>tbody>tr>td, .ng-table>tfoot>tr>td{
+	height: 50px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.ng-table-filters{
+	height: 60px;
+}
+
+.ng-table-filters .filter{
+	vertical-align: top;
+}
+
+.ng-table>thead>tr>th{
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+.actions{
+	padding-bottom: 30px;
+}
+
+.table-actions{
+	width: 130px;
 }
