@@ -26,3 +26,27 @@
     </div>
 </section>
 
+<section data-ng-controller="TareasController">
+    <div class="page-header">
+        <h1>Listado de Tareas</h1>
+    </div>
+    <div>
+        <table ng-table="tableParams" show-filter="true">
+            <tr ng-repeat="tarea in $data">
+                <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{tarea.name}}</td>
+                <td data-title="'Prioridad'" filter="{ 'prioridad': 'text' }">{{tarea.prioridad}}</td>
+                <td>
+                    <div class="table-actions">
+                        <a class="btn btn-info" title="view" href="/#!/tareas/{{tarea._id}}">
+                            <span class="glyphicon glyphicon-eye-open"></span> 
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!tareas.$resolved || tareas.length">
+        No hay tareas registradas <a href="/#!/tareas/create">Registrar una Tarea</a>?
+    </div>
+</section>
+

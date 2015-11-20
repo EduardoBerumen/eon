@@ -13,7 +13,7 @@ var TareaSchema = new Schema({
 	prioridad: {
 		type: String,
 		default: '',
-		required: 'Ingresa su prioridad',
+		required: 'Ingresa la prioridad',
 		trim: true
 	},
 	name: {

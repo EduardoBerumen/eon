@@ -23,10 +23,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 
 		$scope.tableParams = new ngTableParams(params, settings);
 
-		/*$scope.tarea = {
-       		prioridad: 'PLANIFICADA'
-      	};
-*/
+		
 		// Create new Tarea
 		$scope.create = function() {
 			// Create new Tarea object
@@ -52,7 +49,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 			if ( tarea ) { 
 				tarea.$remove();
 
-				for (var i in $scope.tareas) {
+				for (var i in $scope.tarea) {
 					if ($scope.tareas [i] === tarea) {
 						$scope.tareas.splice(i, 1);
 					}

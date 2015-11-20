@@ -28,6 +28,8 @@ body{
 .ng-table>thead>tr>th{
 	text-align:left;
 	border:0;
+	background-color: #D9EDF7;
+	text-align: center;
 }
 
 .ng-table>tbody>tr>th, .ng-table>tfoot>tr>th, .ng-table>thead>tr>td, .ng-table>tbody>tr>td, .ng-table>tfoot>tr>td{
@@ -54,4 +56,9 @@ body{
 
 .table-actions{
 	width: 130px;
+}
+
+.ng-table th.filter .input-filter {
+	width: 70%;
+	margin: 0 auto;
 }

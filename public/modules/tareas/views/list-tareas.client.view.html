@@ -3,25 +3,21 @@
         <h1>Tareas</h1>
     </div>
     <div>
-        <table ng-table="tableParams" ng-table-counts="hidde">
+        <table ng-table="tableParams" show-filter="true">
             <tr ng-repeat="tarea in $data">
-                <!-- <td title="'Nombre'" filter="{ name: 'text'}" sortable="'name'">
-                    {{tarea.name}}</td>
-                <td title="'Prioridad'" filter="{ prioridad: 'text'}" sortable="'prioridad'">
-                    {{tarea.age}}</td> -->
-                <td data-title="'Nombre'">{{tarea.name}}</td>
-                <td data-title="'Prioridad'">{{tarea.prioridad}}</td>
+                <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{tarea.name}}</td>
+                <td data-title="'Prioridad'" filter="{ 'prioridad': 'text' }">{{tarea.prioridad}}</td>
                 <td>
                     <div class="table-actions">
-                        <a class="btn btn-default" title="view" href="/#!/tareas/{{tarea._id}}">
+                        <a class="btn btn-success" title="view" href="/#!/tareas/{{tarea._id}}">
                             <span class="glyphicon glyphicon-eye-open"></span> 
                         </a>
-                        <a class="btn btn-default" title="view" href="/#!/tareas/{{tarea._id}}/edit">
+                        <!-- <a class="btn btn-primary" title="view" href="/#!/tareas/{{tarea._id}}/edit">
                             <span class="glyphicon glyphicon-edit"></span> 
                         </a>
-                        <button tpe="button" class="btn btn-danger" title="remove" data-ng-click="remove(tarea)">
+                        <button type="button" class="btn btn-danger" title="remove" data-ng-click="remove(tarea)">
                             <span class="glyphicon glyphicon-remove-circle"></span>
-                        </button>
+                        </button> -->
                     </div>
                 </td>
             </tr>

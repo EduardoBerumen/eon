@@ -86,6 +86,9 @@ exports.delete = function(req, res) {
 
 exports.list = function(req, res) { 
 
+	console.info(req.query);
+	var sort;
+	var sortObject = [];
 	var count = req.query.count || 5;
 	var page = req.query.page || 1;
 
@@ -102,10 +105,17 @@ var pagination = {
 	count: count
 };
 
+if (req.query.sorting){
+	var sortKey = Object.keys(req.query.sorting)[0];
+	var sortValue = req.query.sorting[sortKey];
+
+	sortObject[sortValue] = sortKey;
+}else{
+	sortObject['desc'] = '_id';
+}
+
 var sort = {
-	sort: {
-		desc: '_id'
-	}
+	sort: sortObject
 };
 
 Tarea
