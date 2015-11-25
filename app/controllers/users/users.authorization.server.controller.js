@@ -21,6 +21,19 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
+//list usuarios
+
+exports.list = function(req, res) {
+	User.find().exec(function(err, user) {
+		if(err){
+			message : 'error'
+		}
+		else{
+			res.jsonp(user);
+		}
+	});
+};
+
 /**
  * Require login routing middleware
  */

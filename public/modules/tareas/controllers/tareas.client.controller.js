@@ -1,9 +1,11 @@
 'use strict';
 
 // Tareas controller
-angular.module('tareas').controller('TareasController', ['$scope', '$stateParams', '$location', 'Authentication', 'Tareas', 'ngTableParams',
-	function($scope, $stateParams, $location, Authentication, Tareas, ngTableParams) {
+angular.module('tareas').controller('TareasController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Tareas', 'ngTableParams',
+	function($scope, $http ,$stateParams, $location, Authentication, Tareas, ngTableParams) {
 		$scope.authentication = Authentication;
+
+		$scope.usuarios = [];
 
 		var params = {
 			page: 1,
@@ -56,7 +58,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 				}
 			} else {
 				$scope.tarea.$remove(function() {
-					$location.path('tareas');
+					$location.path('/tareas/create');
 				});
 			}
 		};
@@ -83,5 +85,20 @@ angular.module('tareas').controller('TareasController', ['$scope', '$stateParams
 				tareaId: $stateParams.tareaId
 			});
 		};
+
+		$scope.list = function() {
+			$http.get('/users/listUsers').success(function(response) {
+
+				/*angular.forEach(response,function(value,key){
+					$scope.usuarios.push(value);
+				});
+				console.log($scope.usuarios);*/
+				$scope.usuarios = response;
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
+		};
+
+		$scope.list();
 	}
 ]);

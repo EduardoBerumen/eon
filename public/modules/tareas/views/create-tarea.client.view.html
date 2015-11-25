@@ -1,12 +1,15 @@
 <section data-ng-controller="TareasController">
     <div class="page-header">
-        <h1>Nueva Tarea</h1>
+        <h3>Nueva Tarea</h3>
+
+        <div class="" ng-repeat="usuario in usuarios">            
+            {{usuario.username | uppercase}}
+        </div>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Nombre</label>
                     <div class="controls">
                         <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Nombre de la Tarea" required>
                         <li class="glyphicon glyphicon-time"></li> Elige la prioridad
@@ -15,13 +18,43 @@
                         <input type="radio" data-ng-model="prioridad" id="correccion" value="CORRECCION"/> Correccion<br/><br/>
                         <!-- <tt>prioridad = {{prioridad | json}}</tt><br/> -->
 
-                        <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
+                       <md-button type="submit" class="md-raised md-primary submit">Registrar</md-button>
                     </div>
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
             </fieldset>
-        </form>
+        </form><br/><br/>
+    </div>
+
+
+
+    <div class="page-header">
+        <h3>Listado de Tareas</h3>
+    </div>
+    <div>
+        <table ng-table="tableParams" show-filter="true">
+            <tr ng-repeat="tarea in $data">
+                <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{tarea.name}}</td>
+                <td data-title="'Prioridad'" filter="{ 'prioridad': 'text' }">{{tarea.prioridad}}</td>
+                <td>
+                    <div class="table-actions">
+                        <a class="btn btn-success" title="view" href="/#!/tareas/{{tarea._id}}">
+                            <span class="glyphicon glyphicon-eye-open"></span> 
+                        </a>
+                        <!-- <a class="btn btn-primary" title="view" href="/#!/tareas/{{tarea._id}}/edit">
+                            <span class="glyphicon glyphicon-edit"></span> 
+                        </a>
+                        <button type="button" class="btn btn-danger" title="remove" data-ng-click="remove(tarea)">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button> -->
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!tareas.$resolved || tareas.length">
+        No hay tareas registradas <a href="/#!/tareas/create">Registrar una Tarea</a>?
     </div>
 </section>
