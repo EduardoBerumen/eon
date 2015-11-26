@@ -69,11 +69,62 @@ exports.delete = function(req, res) {
 	});
 };
 
+//lista proyectos para vista de tareas
+
+//list usuarios
+
+exports.listProyectos = function(req, res) {
+	Proyecto.find().exec(function(err, proyecto) {
+		if(err){
+			message : 'error'
+		}
+		else{
+			res.jsonp(proyecto);
+		}
+	});
+};
+
 /**
  * List of Proyectos
  */
 exports.list = function(req, res) { 
-	Proyecto.find().sort('-created').populate('user', 'displayName').exec(function(err, proyectos) {
+	var sort;
+	var sortObject = [];
+	var count = req.query.count || 5;
+	var page = req.query.page || 1;
+
+	var filter = {
+		filters: {
+			mandatory:{
+				contains: req.query.filter
+			}
+		}
+	};
+
+var pagination = {
+	start: [page - 1] * count,
+	count: count
+};
+
+if (req.query.sorting){
+	var sortKey = Object.keys(req.query.sorting)[0];
+	var sortValue = req.query.sorting[sortKey];
+
+	sortObject[sortValue] = sortKey;
+}else{
+	sortObject['desc'] = '_id';
+}
+
+var sort = {
+	sort: sortObject
+};
+
+Proyecto
+	.find()
+	.filter(filter)
+	.order(sort)
+	.page(pagination, function(err,proyectos){
+
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

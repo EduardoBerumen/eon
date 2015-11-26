@@ -1,23 +1,42 @@
 <section data-ng-controller="ProyectosController">
     <div class="page-header">
-        <h1>New Proyecto</h1>
+        <h3>Nuevo Proyecto</h3>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+    <md-content>
+        <form name="formProyect" class="formProyect"  data-ng-submit="create()">
+          <md-input-container class="md-block">
+            <label>Nombre del Proyecto</label>
+            <input required name="name" data-ng-model="name">
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Descripcion</label>
+            <input required name="descripcion" data-ng-model="descripcion">
+          </md-input-container>
+          <md-button type="submit" class="md-raised md-primary submit">Registrar</md-button>
+        </form><br/><br/>
+    </md-content>
+</section>
+
+<section data-ng-controller="ProyectosController" data-ng-init="find()">
+    <div class="page-header">
+        <h3>Lista de Proyectos</h3>
+    </div>
+    <div>
+        <table ng-table="tableParams" show-filter="true">
+            <tr ng-repeat="proyecto in $data">
+                <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{proyecto.name}}</td>
+                <td data-title="'Fecha Inicio'">{{proyecto.created  | date:'medium'}}</td>
+                <td>
+                    <div class="table-actions">
+                        <a class="btn btn-success" title="view" href="/#!/proyectos/{{proyecto._id}}">
+                            <span class="glyphicon glyphicon-eye-open"></span> 
+                        </a>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!proyectos.$resolved || proyectos.length">
+        No Existen Proyectos <a href="/#!/proyectos/create">Crear uno</a>?
     </div>
 </section>

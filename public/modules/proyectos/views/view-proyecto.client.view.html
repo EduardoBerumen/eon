@@ -2,19 +2,20 @@
 	<div class="page-header">
 		<h1 data-ng-bind="proyecto.name"></h1>
 	</div>
+	<p>{{proyecto.descripcion}}</p>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == proyecto.user._id))">
 		<a class="btn btn-primary" href="/#!/proyectos/{{proyecto._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
+		<a class="btn btn-danger" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
 	<small>
 		<em class="text-muted">
-			Posted on
+			Creado en
 			<span data-ng-bind="proyecto.created | date:'mediumDate'"></span>
-			by
+			por
 			<span data-ng-bind="proyecto.user.displayName"></span>
 		</em>
 	</small>

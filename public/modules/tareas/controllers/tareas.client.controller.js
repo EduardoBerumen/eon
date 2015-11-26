@@ -5,7 +5,11 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 	function($scope, $http ,$stateParams, $location, Authentication, Tareas, ngTableParams) {
 		$scope.authentication = Authentication;
 
+    $scope.names = [];
+    $scope.isReadonly = false;
+
 		$scope.usuarios = [];
+		$scope.proyectos = [];
 
 		var params = {
 			page: 1,
@@ -86,7 +90,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 			});
 		};
 
-		$scope.list = function() {
+		$scope.listUsuarios = function() {
 			$http.get('/users/listUsers').success(function(response) {
 
 				/*angular.forEach(response,function(value,key){
@@ -99,6 +103,16 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 			});
 		};
 
-		$scope.list();
+		$scope.listUsuarios();
+
+		$scope.listProyectos = function() {
+			$http.get('/proyectos/listProyectos').success(function(response) {
+				$scope.proyectos = response;
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
+		};
+
+		$scope.listProyectos();
 	}
 ]);

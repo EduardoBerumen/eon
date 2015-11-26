@@ -5,6 +5,9 @@
         <div class="" ng-repeat="usuario in usuarios">            
             {{usuario.username | uppercase}}
         </div>
+        <div class="" ng-repeat="proyecto in proyectos">            
+            {{proyecto.name | uppercase}}
+        </div>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>

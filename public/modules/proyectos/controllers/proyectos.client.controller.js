@@ -1,15 +1,34 @@
 'use strict';
 
 // Proyectos controller
-angular.module('proyectos').controller('ProyectosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Proyectos',
-	function($scope, $stateParams, $location, Authentication, Proyectos) {
+angular.module('proyectos').controller('ProyectosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Proyectos', 'ngTableParams',
+	function($scope, $stateParams, $location, Authentication, Proyectos, ngTableParams) {
 		$scope.authentication = Authentication;
+
+		var params = {
+			page: 1,
+			count: 5
+		};
+
+		var settings = {
+			total: 0,
+			counts: [5,10,15],
+			getData: function($defer, params){
+				Proyectos.get(params.url(), function(response){
+					params.total(response.total);
+					$defer.resolve(response.results);
+				});
+			}
+		};
+
+		$scope.tableParams = new ngTableParams(params, settings);
 
 		// Create new Proyecto
 		$scope.create = function() {
 			// Create new Proyecto object
 			var proyecto = new Proyectos ({
-				name: this.name
+				name: this.name,
+				descripcion: this.descripcion
 			});
 
 			// Redirect after save
@@ -18,6 +37,7 @@ angular.module('proyectos').controller('ProyectosController', ['$scope', '$state
 
 				// Clear form fields
 				$scope.name = '';
+				$scope.descripcion = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -35,7 +55,7 @@ angular.module('proyectos').controller('ProyectosController', ['$scope', '$state
 				}
 			} else {
 				$scope.proyecto.$remove(function() {
-					$location.path('proyectos');
+					$location.path('proyectos/create');
 				});
 			}
 		};

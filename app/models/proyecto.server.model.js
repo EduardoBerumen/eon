@@ -13,8 +13,12 @@ var ProyectoSchema = new Schema({
 	name: {
 		type: String,
 		default: '',
-		required: 'Please fill Proyecto name',
+		required: 'El campo nombre es Obligaatorio',
 		trim: true
+	},
+	descripcion: {
+		type: String,
+		default: ''
 	},
 	created: {
 		type: Date,

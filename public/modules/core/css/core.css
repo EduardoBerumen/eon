@@ -1,5 +1,5 @@
 body{
-	background-color: #f5f5f5;
+	background-color: #fff;
 }
 .content {
 	margin-top: 100px;
@@ -63,5 +63,7 @@ body{
 	margin: 0 auto;
 }
 .submit{
-	width: 100%;
+	width: 50%;
+	margin-left: 25%;
+	background: #52AC52 !important;
 }
