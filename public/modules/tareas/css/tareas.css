@@ -1,0 +1,29 @@
+md-datepicker{
+	background-color: transparent;
+}
+.md-datepicker-input{
+	width: 220px !important;
+	color: black;
+}
+.md-calendar-month-label{
+	color: white;
+}
+.md-pane-open{
+	background-color: #999;
+	color: white;
+}
+.md-calendar-selected-date{
+	background-color: #52AC52;
+	border-radius: 50%;
+}
+.md-calendar-date-selection-indicator:hover{
+	background-color: #f5f5f5;
+}
+.text-danger{
+	text-align: center;
+	background-color: rgba(255, 0, 0, 0.22);;
+	height: 40px;
+	padding: 10px;
+	border-radius: 10px;
+	
+}

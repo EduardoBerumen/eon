@@ -1,26 +1,39 @@
 <section data-ng-controller="TareasController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1>Edit Tarea</h1>
+        <h3>Editar Tarea</h3>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <div class="controls">
-                        <input type="text" data-ng-model="tarea.name" id="name" class="form-control" placeholder="Nombre de la Tarea" required>
-                        <li class="glyphicon glyphicon-time"></li> Elige la prioridad
-                        <input type="radio" data-ng-model="tarea.prioridad" id="planificada" value="PLANIFICADA"/> Planificada
-                        <input type="radio" data-ng-model="tarea.prioridad" id="mejora" value="MEJORA"/> Mejora
-                        <input type="radio" data-ng-model="tarea.prioridad" id="correccion" value="CORRECCION"/> Correccion<br/><br/>
-                        <!-- <tt>prioridad = {{prioridad | json}}</tt><br/> -->
-
-                        <md-button type="submit" class="md-raised md-primary submit">Registrar</md-button>
-                    </div>
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+        <md-content>
+            <form name="formProyect" class="formProyect"  data-ng-submit="update()">
+                
+                <md-datepicker ng-model="tarea.dateLim" md-placeholder="Feche Limite Para Terminar"></md-datepicker>
+                
+                <md-input-container class="md-block">
+                    <label>Nombre de la Tarea</label>
+                    <input required name="name" data-ng-model="tarea.name">
+                </md-input-container>
+                <md-input-container>
+                    <label>State</label>
+                    <md-select  data-ng-model="tarea.status" id="status">
+                      <md-option value="Espera" selected>En Espera</md-option>
+                      <md-option value="Proceso">En Proceso</md-option>
+                      <md-option value="Pausa">En Pausa</md-option>
+                      <md-option value="Terminada">Terminada</md-option>
+                      <md-option value="Cancelada">Cancelada</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-datepicker data-ng-model="tarea.dateFin" md-placeholder="Feche Terminada" ng-show="tarea.status == 'Terminada'"></md-datepicker><br/><br/>
+                <md-radio-group  data-ng-model="tarea.prioridad" required>
+                    <li class="glyphicon glyphicon-time"></li> Elige la prioridad
+                    <md-radio-button value="PLANIFICADA" class="md-primary">Planificada</md-radio-button>
+                    <md-radio-button value="MEJORA" class="md-primary"> Mejora </md-radio-button>
+                    <md-radio-button value="CORRECCION" class="md-primary">Correccion</md-radio-button>
+                </md-radio-group>
+              <md-button type="submit" class="md-raised md-primary submit">Actualizar</md-button>
+            </form><br/><br/>
+        </md-content>
+        <div data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>  
     </div>
 </section>

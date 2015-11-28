@@ -16,11 +16,25 @@ var TareaSchema = new Schema({
 		required: 'Ingresa la prioridad',
 		trim: true
 	},
+	status: {
+		type: String,
+		default: '',
+		required: 'Ingresa el Status',
+		trim: true
+	},
 	name: {
 		type: String,
 		default: '',
 		required: 'Ingresa el nombre de la tarea',
 		trim: true
+	},
+	dateFin: {
+		type: Date,
+		default: ''
+	},
+	dateLim: {
+		type: Date,
+		default: ''
 	},
 	created: {
 		type: Date,

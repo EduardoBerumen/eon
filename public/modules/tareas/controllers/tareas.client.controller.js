@@ -5,8 +5,6 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 	function($scope, $http ,$stateParams, $location, Authentication, Tareas, ngTableParams) {
 		$scope.authentication = Authentication;
 
-    $scope.names = [];
-    $scope.isReadonly = false;
 
 		$scope.usuarios = [];
 		$scope.proyectos = [];
@@ -29,12 +27,19 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 
 		$scope.tableParams = new ngTableParams(params, settings);
 
+
+		$( "#auto" ).keyup(function() {
+			console.log($('#auto').val());
+		});
 		
 		// Create new Tarea
 		$scope.create = function() {
 			// Create new Tarea object
 			var tarea = new Tareas ({
+				dateLim : this.dateLim,
+				dateFin : this.dateFin,
 				name: this.name,
+				status: this.status,
 				prioridad: this.prioridad
 			});
 
@@ -43,8 +48,12 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 				$location.path('tareas/' + response._id);
 
 				// Clear form fields
+				$scope.dateLim = '';
+				$scope.dateFin = '';
 				$scope.name = '';
+				$scope.status = '';
 				$scope.prioridad = 'PLANIFICADA';
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -76,6 +85,13 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
+
+			/*$http.put('tareas/' +  tarea._id).success(function(response) {
+				$scope.tarea = response;
+				$location.path('tareas/' + tarea._id);
+			}).error(function(response) {
+				$scope.error = response.message;
+			});*/
 		};
 
 		// Find a list of Tareas
@@ -84,9 +100,21 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 		};
 
 		// Find existing Tarea
+		/*$scope.findOne = function() {
+			$http.get('tareas/' + $stateParams.tareaId).success(function(response) {
+				$scope.tarea = response;
+				$scope.dateLim = new Date($scope.tarea.dateLim);
+			}).error(function(response) {
+				$scope.error = response.message;
+			});
+		};*/
 		$scope.findOne = function() {
 			$scope.tarea = Tareas.get({ 
 				tareaId: $stateParams.tareaId
+			}).$promise.then(function(tarea) {
+			    $scope.tarea = tarea;
+				$scope.tarea.dateLim = new Date(tarea.dateLim);
+				console.log($scope.tarea);
 			});
 		};
 

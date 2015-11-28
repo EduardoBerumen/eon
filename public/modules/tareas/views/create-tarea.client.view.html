@@ -10,27 +10,38 @@
         </div>
     </div>
     <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="create()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <div class="controls">
-                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Nombre de la Tarea" required>
-                        <li class="glyphicon glyphicon-time"></li> Elige la prioridad
-                        <input type="radio" data-ng-model="prioridad" id="planificada" value="PLANIFICADA"/> Planificada
-                        <input type="radio" data-ng-model="prioridad" id="mejora" value="MEJORA"/> Mejora
-                        <input type="radio" data-ng-model="prioridad" id="correccion" value="CORRECCION"/> Correccion<br/><br/>
-                        <!-- <tt>prioridad = {{prioridad | json}}</tt><br/> -->
-
-                       <md-button type="submit" class="md-raised md-primary submit">Registrar</md-button>
-                    </div>
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form><br/><br/>
+        <md-content>
+            <form name="formProyect" class="formProyect"  data-ng-submit="create()">
+                
+                <md-datepicker data-ng-model="dateLim" md-placeholder="Feche Limite Para Terminar"></md-datepicker>
+                <md-input-container class="md-block">
+                    <label>Nombre de la Tarea</label>
+                    <input required name="name" data-ng-model="name">
+                </md-input-container>
+                <md-input-container>
+                    <label>State</label>
+                    <md-select  data-ng-model="status" disabled>
+                      <md-option value="Espera" selected>En Espera</md-option>
+                      <md-option value="Proceso">En Proceso</md-option>
+                      <md-option value="Pausa">En Pausa</md-option>
+                      <md-option value="Terminada">Terminada</md-option>
+                      <md-option value="Cancelada">Cancelada</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-radio-group  data-ng-model="prioridad" required>
+                    <li class="glyphicon glyphicon-time"></li> Elige la prioridad
+                    <md-radio-button value="PLANIFICADA" class="md-primary">Planificada</md-radio-button>
+                    <md-radio-button value="MEJORA" class="md-primary"> Mejora </md-radio-button>
+                    <md-radio-button value="CORRECCION" class="md-primary">Correccion</md-radio-button>
+                </md-radio-group>
+                
+              <md-button type="submit" class="md-raised md-primary submit">Registrar</md-button>
+            </form><br/><br/>
+        </md-content>
+		<div data-ng-show="error" class="text-danger">
+			<strong data-ng-bind="error"></strong>
+		</div>  
     </div>
-
 
 
     <div class="page-header">
@@ -41,6 +52,8 @@
             <tr ng-repeat="tarea in $data">
                 <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{tarea.name}}</td>
                 <td data-title="'Prioridad'" filter="{ 'prioridad': 'text' }">{{tarea.prioridad}}</td>
+                <td  data-title="'Status'" filter="{ 'status': 'text' }">{{tarea.status}}</td>
+                <!-- <td  data-title="'Fecha Limite'" filter="{ 'dateLim': 'text' }">{{tarea.dateLim | date: "dd-MM-yyyy"}}</td> -->
                 <td>
                     <div class="table-actions">
                         <a class="btn btn-success" title="view" href="/#!/tareas/{{tarea._id}}">

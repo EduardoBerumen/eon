@@ -71,8 +71,6 @@ exports.delete = function(req, res) {
 
 //lista proyectos para vista de tareas
 
-//list usuarios
-
 exports.listProyectos = function(req, res) {
 	Proyecto.find().exec(function(err, proyecto) {
 		if(err){
