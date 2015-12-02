@@ -2,6 +2,12 @@
 	<div class="page-header">
 		<h1 data-ng-bind="tarea.name"></h1>
 		{{tarea.prioridad}}
+		<div ng-repeat="name in tarea.nombres">
+			{{name.name}}
+		</div>
+		<div ng-repeat="proye in tarea.proyectos">
+			{{proye.name}}
+		</div>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == tarea.user._id))">
 		<a class="btn btn-primary" href="/#!/tareas/{{tarea._id}}/edit">

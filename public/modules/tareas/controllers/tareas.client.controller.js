@@ -8,6 +8,9 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 
 		$scope.usuarios = [];
 		$scope.proyectos = [];
+		$scope.nombres = [];
+		$scope.proyects = [];
+
 
 		var params = {
 			page: 1,
@@ -27,11 +30,50 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 
 		$scope.tableParams = new ngTableParams(params, settings);
 
+		$scope.addUser = function(){
+			var val = $( "#usuarios option:selected" ).text();
+			var aux = 0;  
 
-		$( "#auto" ).keyup(function() {
-			console.log($('#auto').val());
-		});
+			for (var i = 0; i < $scope.nombres.length; i++) {
+				if ($scope.nombres[i].name == val){
+					aux++;
+				}
+			};
+
+			if(aux == 0){
+				$scope.nombres.push({'name':val});
+			}else{
+				alert('El usuario ya esta agregado');
+			}
+
+		    console.log($scope.nombres);
+		};
+
+		$scope.addProyect = function(){
+			var val = $( "#proyectos option:selected" ).text();
+			var aux = 0;  
+
+			for (var i = 0; i < $scope.proyects.length; i++) {
+				if ($scope.proyects[i].name == val){
+					aux++;
+				}
+			};
+
+			if(aux == 0){
+				$scope.proyects.push({'name':val});
+			}else{
+				alert('El proyecto ya esta agregado');
+			}
+
+		    console.log($scope.proyects);
+		};
+
+		$scope.tagDeleted = function(){
+			console.log($scope.nombres);
+			console.log($scope.proyects);
+		};
 		
+
 		// Create new Tarea
 		$scope.create = function() {
 			// Create new Tarea object
@@ -40,8 +82,12 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 				dateFin : this.dateFin,
 				name: this.name,
 				status: this.status,
-				prioridad: this.prioridad
+				prioridad: this.prioridad,
+				nombres: this.nombres,
+				proyectos: this.proyects
 			});
+
+			console.log(tarea);
 
 			// Redirect after save
 			tarea.$save(function(response) {
@@ -52,7 +98,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 				$scope.dateFin = '';
 				$scope.name = '';
 				$scope.status = '';
-				$scope.prioridad = 'PLANIFICADA';
+				$scope.prioridad = '';
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -114,7 +160,6 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 			}).$promise.then(function(tarea) {
 			    $scope.tarea = tarea;
 				$scope.tarea.dateLim = new Date(tarea.dateLim);
-				console.log($scope.tarea);
 			});
 		};
 

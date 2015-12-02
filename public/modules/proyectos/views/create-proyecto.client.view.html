@@ -25,7 +25,7 @@
         <table ng-table="tableParams" show-filter="true">
             <tr ng-repeat="proyecto in $data">
                 <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{proyecto.name}}</td>
-                <td data-title="'Fecha Inicio'">{{proyecto.created  | date:'medium'}}</td>
+                <td data-title="'Created'">{{proyecto.created  | date:'medium'}}</td>
                 <td>
                     <div class="table-actions">
                         <a class="btn btn-success" title="view" href="/#!/proyectos/{{proyecto._id}}">

@@ -25,5 +25,16 @@ md-datepicker{
 	height: 40px;
 	padding: 10px;
 	border-radius: 10px;
-	
+}
+#usuarios, #proyectos{
+	width: 80%;
+	display: inline-block;
+}
+#add{
+	border-radius: 50%;
+    font-size: 18px;
+    width: 33px;
+    height: 33px;
+    padding: 7px;
+    border: 0px;
 }

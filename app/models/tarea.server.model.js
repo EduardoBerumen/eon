@@ -10,6 +10,16 @@ var mongoose = require('mongoose'),
  * Tarea Schema
  */
 var TareaSchema = new Schema({
+	proyectos: {
+		type: Array,
+		default: '',
+		trim: true
+	},
+	nombres: {
+		type: Array,
+		default: '',
+		trim: true
+	},
 	prioridad: {
 		type: String,
 		default: '',
