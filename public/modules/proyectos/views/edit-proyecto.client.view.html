@@ -2,26 +2,18 @@
     <div class="page-header">
         <h1>Editar Proyecto</h1>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Nombre</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="proyecto.name" id="name" class="form-control" placeholder="Nombre" required>
-                    </div>
-                    <label class="control-label" for="name">Descripcion</label>
-                    <div class="controls">
-                        <textarea type="text" data-ng-model="proyecto.descripcion" id="descripcion" class="form-control" placeholder="Descripcion" rows="10" required></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Actualizar" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
-    </div>
+
+    <md-content>
+        <form name="formProyect" class="formProyect"  data-ng-submit="update()">
+          <md-input-container class="md-block">
+            <label>Nombre del Proyecto</label>
+            <input data-ng-model="proyecto.name" id="name" class="form-control" placeholder="Nombre" required>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Descripcion</label>
+            <input required  data-ng-model="proyecto.descripcion" id="descripcion">
+          </md-input-container>
+          <md-button type="submit" class="md-raised md-primary submit">Actualizar</md-button>
+        </form><br/><br/>
+    </md-content>
 </section>

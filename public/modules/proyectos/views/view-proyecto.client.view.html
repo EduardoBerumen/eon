@@ -1,22 +1,22 @@
 <section data-ng-controller="ProyectosController" data-ng-init="findOne()">
-	<div class="page-header">
+	<div class="ficha">
 		<h1 data-ng-bind="proyecto.name"></h1>
+		<p>{{proyecto.descripcion}}</p>
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == proyecto.user._id))">
+			<a class="btn btn-primary" href="/#!/proyectos/{{proyecto._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-danger" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<small>
+			<em class="text-muted">
+				Creado por
+				<span data-ng-bind="proyecto.user.displayName"></span>
+				en
+				<span data-ng-bind="proyecto.created | date:'mediumDate'"></span>
+			</em>
+		</small>
 	</div>
-	<p>{{proyecto.descripcion}}</p>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == proyecto.user._id))">
-		<a class="btn btn-primary" href="/#!/proyectos/{{proyecto._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-danger" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Creado en
-			<span data-ng-bind="proyecto.created | date:'mediumDate'"></span>
-			por
-			<span data-ng-bind="proyecto.user.displayName"></span>
-		</em>
-	</small>
 </section>

@@ -29,6 +29,35 @@
                     <md-radio-button value="MEJORA" class="md-primary"> Mejora </md-radio-button>
                     <md-radio-button value="CORRECCION" class="md-primary">Correccion</md-radio-button>
                 </md-radio-group>
+                <div class="form-group">
+                  <label for="usuarios">Usuarios:</label><br/>
+                  <select class="form-control" id="usuarios">
+                    <option ng-repeat="usuario in usuarios" value="{{usuario.username}}">{{usuario.username | uppercase}}</option>
+                  </select>
+                  <button data-ng-click="addUser();" id="add" class="glyphicon glyphicon-plus" onclick="event.preventDefault()"></button>
+                </div>
+
+                 <md-chips data-ng-model="nombres">
+                    <button class="md-chip-remove" ng-click="tagDeleted()" md-chip-remove> <md-icon md-svg-icon="md-close"></md-icon> </button>
+                    <md-chip-template>
+                        {{$chip.name}}
+                    </md-chip-template>
+                 </md-chips>
+
+                 <div class="form-group">
+                  <label for="proyectos">Proyectos:</label><br/>
+                  <select class="form-control" id="proyectos">
+                    <option ng-repeat="proyecto in proyectos" value="{{proyecto.name}}">{{proyecto.name | uppercase}}</option>
+                  </select>
+                  <button data-ng-click="addProyect();" id="add" class="glyphicon glyphicon-plus" onclick="event.preventDefault()"></button>
+                </div>
+
+                 <md-chips data-ng-model="proyects">
+                    <button class="md-chip-remove" ng-click="tagDeleted()" md-chip-remove> <md-icon md-svg-icon="md-close"></md-icon> </button>
+                    <md-chip-template>
+                        {{$chip.name}}
+                    </md-chip-template>
+                 </md-chips>
               <md-button type="submit" class="md-raised md-primary submit">Actualizar</md-button>
             </form><br/><br/>
         </md-content>

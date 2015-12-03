@@ -1,28 +1,31 @@
-<section data-ng-controller="TareasController" data-ng-init="findOne()">
-	<div class="page-header">
-		<h1 data-ng-bind="tarea.name"></h1>
-		{{tarea.prioridad}}
-		<div ng-repeat="name in tarea.nombres">
-			{{name.name}}
-		</div>
+<section data-ng-controller="TareasController" data-ng-init="findOne()" class="contenedor">
+	
+	<div ng-repeat="usuario in tarea.nombres" class="names">
+		<span class="user" title="{{usuario.name | lowercase}}">{{usuario.name | lowercase | limitTo: 2}}</span>
+	</div>
+	<div class="clearfix"></div>
+	<div class="ficha">
+		<h2 data-ng-bind="tarea.name"></h2>
+		<h4>Proyectos:</h4>
 		<div ng-repeat="proye in tarea.proyectos">
-			{{proye.name}}
+			<span class="glyphicon glyphicon-menu-right proyect"> {{proye.name}}</span>
 		</div>
+	
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == tarea.user._id)) || ((authentication.user) && (authentication.user.username =='Administrador'))">
+			<a class="btn btn-primary" href="/#!/tareas/{{tarea._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-danger" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<small>
+			<em class="text-muted">
+				Tarea registrada por
+				<span data-ng-bind="tarea.user.displayName"></span>
+				en
+				<span data-ng-bind="tarea.created | date:'mediumDate'"></span>
+			</em>
+		</small>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == tarea.user._id))">
-		<a class="btn btn-primary" href="/#!/tareas/{{tarea._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-danger" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="tarea.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="tarea.user.displayName"></span>
-		</em>
-	</small>
 </section>

@@ -99,6 +99,8 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 				$scope.name = '';
 				$scope.status = '';
 				$scope.prioridad = '';
+				$scope.nombres = [];
+				$scope.proyects = [];
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -125,6 +127,8 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 		// Update existing Tarea
 		$scope.update = function() {
 			var tarea = $scope.tarea;
+
+			console.log(tarea);
 
 			tarea.$update(function() {
 				$location.path('tareas/' + tarea._id);
@@ -159,7 +163,10 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 				tareaId: $stateParams.tareaId
 			}).$promise.then(function(tarea) {
 			    $scope.tarea = tarea;
+			    console.log($scope.tarea);
 				$scope.tarea.dateLim = new Date(tarea.dateLim);
+				$scope.nombres = $scope.tarea.nombres;
+				$scope.proyects = $scope.tarea.proyectos;
 			});
 		};
 
