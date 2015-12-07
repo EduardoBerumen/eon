@@ -12,7 +12,7 @@
                     <input required name="name" data-ng-model="name">
                 </md-input-container>
                 <md-input-container>
-                    <label>State</label>
+                    <label>Status</label>
                     <md-select  data-ng-model="status" disabled>
                       <md-option value="Espera" selected>En Espera</md-option>
                       <md-option value="Proceso">En Proceso</md-option>
@@ -29,7 +29,7 @@
                 </md-radio-group>
 
                 <div class="form-group">
-                  <label for="usuarios">Usuarios:</label><br/>
+                  <label for="usuarios">Agregar Usuarios:</label><br/>
                   <select class="form-control" id="usuarios">
                     <option ng-repeat="usuario in usuarios" value="{{usuario.username}}">{{usuario.username | uppercase}}</option>
                   </select>
@@ -44,7 +44,7 @@
                  </md-chips>
 
                  <div class="form-group">
-                  <label for="proyectos">Proyectos:</label><br/>
+                  <label for="proyectos">Agregar Proyectos:</label><br/>
                   <select class="form-control" id="proyectos">
                     <option ng-repeat="proyecto in proyectos" value="{{proyecto.name}}">{{proyecto.name | uppercase}}</option>
                   </select>
@@ -71,8 +71,8 @@
         <h3>Listado de Tareas</h3>
     </div>
     <div>
-        <table ng-table="tableParams" show-filter="true">
-            <tr ng-repeat="tarea in $data">
+        <table ng-table="tableParams" show-filter="true" data-ng-show="$data.length">
+            <tr ng-repeat="tarea in $data" class="{{tarea.status}}">
                 <td data-title="'Nombre'" sortable="'name'" filter="{ 'name': 'text' }">{{tarea.name}}</td>
                 <td data-title="'Prioridad'" filter="{ 'prioridad': 'text' }">{{tarea.prioridad}}</td>
                 <td  data-title="'Status'" filter="{ 'status': 'text' }">{{tarea.status}}</td>
@@ -90,6 +90,9 @@
                         </button> -->
                     </div>
                 </td>
+                <td  data-title="'Usuarios Asignados a la Tarea'" ng-repeat="usuario in tarea.nombres" class="cont">
+                    <span class="user" title="{{usuario.name | lowercase}}" style="">{{usuario.name | lowercase | limitTo: 2}}</span>
+                </td>
             </tr>
         </table>
     </div>
@@ -97,3 +100,21 @@
         No hay tareas registradas <a href="/#!/tareas/create">Registrar una Tarea</a>?
     </div>
 </section>
+
+<style>
+  .user {
+    background: #2A6496;
+    font-size: 11px;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    top: 13px;
+    border: 0;
+  }
+
+  .Terminada{
+    background-color: #FFCDD2;
+  }
+</style>

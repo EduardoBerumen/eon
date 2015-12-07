@@ -14,12 +14,12 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 
 		var params = {
 			page: 1,
-			count: 5
+			count: 10
 		};
 
 		var settings = {
 			total: 0,
-			counts: [5,10,15],
+			counts: [10,20,30],
 			getData: function($defer, params){
 				Tareas.get(params.url(), function(response){
 					params.total(response.total);
@@ -165,6 +165,7 @@ angular.module('tareas').controller('TareasController', ['$scope', '$http', '$st
 			    $scope.tarea = tarea;
 			    console.log($scope.tarea);
 				$scope.tarea.dateLim = new Date(tarea.dateLim);
+				$scope.tarea.dateFin = new Date(tarea.dateFin);
 				$scope.nombres = $scope.tarea.nombres;
 				$scope.proyects = $scope.tarea.proyectos;
 			});

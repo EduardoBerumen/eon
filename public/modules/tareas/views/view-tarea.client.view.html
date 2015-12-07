@@ -1,17 +1,20 @@
 <section data-ng-controller="TareasController" data-ng-init="findOne()" class="contenedor">
 	
 	<div ng-repeat="usuario in tarea.nombres" class="names">
-		<span class="user" title="{{usuario.name | lowercase}}">{{usuario.name | lowercase | limitTo: 2}}</span>
+		<span class="" title="{{usuario.name | lowercase}}">{{usuario.name | lowercase | limitTo: 2}}</span>
 	</div>
 	<div class="clearfix"></div>
 	<div class="ficha">
 		<h2 data-ng-bind="tarea.name"></h2>
-		<h4>Proyectos:</h4>
+		<span class="status">{{tarea.status}}</span><br/><br/>
+		<span class="lim" data-ng-bind=" tarea.dateLim | date:'mediumDate' "></span>
+		<label class="fecha">Fecha limite para realizar la tarea:   </label>
+		<h4>Proyectos Asignados a esta Tarea:</h4>
 		<div ng-repeat="proye in tarea.proyectos">
-			<span class="glyphicon glyphicon-menu-right proyect"> {{proye.name}}</span>
+			<span class="proyect">- {{proye.name}}</span>
 		</div>
 	
-		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == tarea.user._id)) || ((authentication.user) && (authentication.user.username =='Administrador'))">
+		<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == tarea.user._id))">
 			<a class="btn btn-primary" href="/#!/tareas/{{tarea._id}}/edit">
 				<i class="glyphicon glyphicon-edit"></i>
 			</a>
@@ -24,8 +27,16 @@
 				Tarea registrada por
 				<span data-ng-bind="tarea.user.displayName"></span>
 				en
-				<span data-ng-bind="tarea.created | date:'mediumDate'"></span>
+				<span data-ng-bind="tarea.created | date:'medium'"></span>
 			</em>
 		</small>
 	</div>
 </section>
+<style>
+    body{
+        color: #f5f5f5;
+    }
+    h2{
+    	letter-spacing: 5px;
+    }
+</style>
